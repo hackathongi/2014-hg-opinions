@@ -10,8 +10,9 @@ class OpinionsController < ApplicationController
 
     if params[:ecommerce_id]
       @ecommerce_id = params[:ecommerce_id]
+      @default_limit = OPINIONS_CONFIG['opinions_limit']
       @base_url = OPINIONS_CONFIG['domain']
-      @api_end_point = OPINIONS_CONFIG['opinions_end_poin']
+      @api_end_point = OPINIONS_CONFIG['opinions_end_point']
 
       @api_url = "#{@base_url}/#{@api_end_point}"
 
@@ -31,19 +32,28 @@ class OpinionsController < ApplicationController
         @total_pages = 0
       end
 
-      @opinions_array = @opinions[:opinions]
+      @api_url = "#{@api_url}?offset=#{@current_page}&token=#{@ecommerce_id}&limit=#{@default_limit}"
 
       if false
         begin
+          @fake_opinions = @opinions
           conn = Faraday.new @api_url
           response = conn.get
           response.status
-          @opinions = response.body
+          if status == 200
+            @opinions = JSON.parse response.body
+          else
+            @opinions = @fake_opinions
+            flash[:error] = "Ha ocurrido un error al conectar con el servidor"
+          end
         rescue
+          @opinions = @fake_opinions
           flash[:error] = "Ha ocurrido un error al conectar con el servidor"
         end
       end
 
+    else
+      flash[:error] = "Aqui no hay opiniones"
     end
   end
 

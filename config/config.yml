@@ -1,8 +1,10 @@
 development:
-  domain: "http://localhost"
-  opinions_end_poin: "opinions"
+  domain: "http://api-test.eshopinion.com"
+  opinions_end_point: "opinions"
+  opinions_limit: 10
 
 production:
-  domain: "http://ecomerce.com"
-  opinions_end_poin: "opinions"
+  domain: "http://api-test.eshopinion.com"
+  opinions_end_point: "opinions"
+  opinions_limit: 10
 

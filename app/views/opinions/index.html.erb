@@ -1,74 +1,61 @@
 <div class="container">
-
-	<!-- page description -->
-	<h1>Llistat d'opinions</h1>
-	<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam lobortis sagittis. Curabitur ut nisi eget leo condimentum porta in quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sed volutpat libero. Fusce pulvinar gravida elit non pretium.</p>
-	<!-- end page description -->
-
-	<!-- alert danger -->
-	<!--<div class="alert alert-danger">Ho sentim, no hem pogut mostrar opinions per aquesta botiga <strong>nom_botiga</strong>.</div>-->
-	<!-- end alert danger -->
-
-	<!-- stats -->
-	<ul class="stats text-center">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-	</ul>
-	<!-- end stats -->
-
-  <!-- list -->
   <div class="row">
-    <ul class="media-list">
-    	<% if @ecommerce_id %>
-  			<% @opinions[:opinions].each do |opinion| %>
-    			<li class="media">
-        			<a class="pull-left" href="#">
-          				<img class="media-object" src="http://placehold.it/160x160" alt="...">
-        			</a>
-        			<div class="media-body">
-          				<h4 class="media-heading">
-          					Comentari de <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
-          					-
-          					<%= opinion[:date].to_time.to_formatted_s(:short) %>
+    <div class="col-sm-12 col-md-12">
+      <!-- page description -->
+      <h1>Llistat d'opinions</h1>
+      <!-- end page description -->
 
-          					<img  src="http://placehold.it/30x30" alt="...">
-          				</h4>
+      <!-- alert danger -->
+      <%= render "shared/flash_message" %>
 
-				        <%= opinion[:description] %>
-        			</div>
-     			</li>
- 	 	<% end %>
-		<% else %>
-  			Ecommerce not found
-  		<% end %>
-    </ul>
+      <% if @ecommerce_id %>
+        <ul class="stats text-center">
+          <% (0..5).each do |rating| %>
+            <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => rating})), {:class => "icon-face-#{rating} big-icon"} %>
+          <% end %>
+        </ul>
+        <!-- end stats -->
+
+        <!-- list -->
+          <div class="media-list">
+            <% @opinions[:opinions].each do |opinion| %>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => opinion[:rating]})), {:class => "pull-right icon-face-#{ opinion[:rating]} small-icon"} %>
+                  <h4><%= opinion[:client][:name]%> <%= opinion[:client][:surname] %> <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small></h4>
+                </div>
+                <div class="panel-body">
+                  <%= opinion[:description] %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <!-- end list -->
+
+        <% if @opinions && params[:ecommerce_id] && @total_pages > 1 %>
+        <div class="text-center">
+          <ul class="pagination">
+            <% if @prev_page %>
+              <li>
+                <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+              </li>
+            <% end %>
+            <% (@first_page..@last_page).to_a.each do |page| %>
+              <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
+                <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
+              </li>
+            <% end %>
+            <% if @next_page %>
+              <li>
+                <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+
+      <% end %>
+
+    </div>
   </div>
-  <!-- end list -->
-
-
-  <% if @opinions && @total_pages > 1 %>
-    <ul class="pagination">
-      <% if @prev_page %>
-        <li>
-          <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-        </li>
-      <% end %>
-      <% (@first_page..@last_page).to_a.each do |page| %>
-        <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
-          <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
-        </li>
-      <% end %>
-      <% if @next_page %>
-        <li>
-          <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-        </li>
-      <% end %>
-    </ul>
-  	<% end %>
-	<!-- end paginator -->
-
 </div>
