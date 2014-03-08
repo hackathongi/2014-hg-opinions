@@ -49,10 +49,10 @@
   </div>
   <!-- end list -->
 
-	<!-- paginator -->
-	<% if @opinions && @total_pages > 1 && params[:page] %>
-    	<ul class="pagination">
-     	 <% if @prev_page %>
+
+  <% if @opinions && @total_pages > 1%>
+    <ul class="pagination">
+      <% if @prev_page %>
         <li>
           <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
         </li>
