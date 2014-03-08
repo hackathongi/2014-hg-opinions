@@ -59,16 +59,16 @@
   <!-- end list -->
 
 
-  <!-- paginator -->
-  <ul class="pagination">
-    <li><a href="#">&laquo;</a></li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">&raquo;</a></li>
-  </ul>
-  <!-- end paginator -->
+  <% if @opinions && @total_pages > 1 %>
+    <ul class="pagination">
+      <% (1..@total_pages).first(3).to_a.each do |page| %>
+        <li>
+          <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
+        </li>
+      <% end %>
+        <!-- <li><a href="">&laquo;</a></li> -->
+        <!-- <li><a href="#">&raquo;</a></li> -->
+    </ul>
+  <% end %>
 
 </div>

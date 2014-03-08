@@ -15,7 +15,8 @@ class OpinionsController < ApplicationController
 
       @api_url = "#{@base_url}/#{@api_end_point}"
 
-      @total_pages = 20
+      @total_pages =  @opinions[:total_page]
+      @query_parameters = request.query_parameters.slice(:page, :size)
 
       if Rails.env == 'production'
         begin
@@ -24,7 +25,6 @@ class OpinionsController < ApplicationController
           response.status
           @opinions = response.body
         rescue
-          # binding.pry
           flash[:error] = "Ha ocurrido un error al conectar con el servidor"
         end
       end
@@ -40,6 +40,7 @@ class OpinionsController < ApplicationController
 
   def load_data
     @opinions = {
+      :total_page => 28,
       :opinions => [
         {
           :opinion_id => 1,
