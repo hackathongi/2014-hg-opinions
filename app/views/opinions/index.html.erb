@@ -1,68 +1,67 @@
 <div class="container">
-  <!-- page description -->
-  <h1>Llistat d'opinions</h1>
-  <!-- end page description -->
+  <div class="row">
+    <div class="col-md-12">
+      <!-- page description -->
+      <h1>Llistat d'opinions</h1>
+      <!-- end page description -->
 
-  <!-- alert danger -->
-  <%= render "shared/flash_message" %>
+      <!-- alert danger -->
+      <%= render "shared/flash_message" %>
 
-  <% if @ecommerce_id %>
-    <ul class="stats text-center">
-      <div class="icon-face-0 big-icon"></div>
-      <div class="icon-face-1 big-icon"></div>
-      <div class="icon-face-2 big-icon"></div>
-      <div class="icon-face-3 big-icon"></div>
-      <div class="icon-face-4 big-icon"></div>
-      <div class="icon-face-5 big-icon"></div>
-    </ul>
-    <!-- end stats -->
+      <% if @ecommerce_id %>
+        <ul class="stats text-center">
+          <div class="icon-face-0 big-icon"></div>
+          <div class="icon-face-1 big-icon"></div>
+          <div class="icon-face-2 big-icon"></div>
+          <div class="icon-face-3 big-icon"></div>
+          <div class="icon-face-4 big-icon"></div>
+          <div class="icon-face-5 big-icon"></div>
+        </ul>
+        <!-- end stats -->
 
-    <!-- list -->
-    <div class="row">
-      <ul class="media-list">
-        <% @opinions[:opinions].each do |opinion| %>
-          <li class="media">
-              <a class="pull-left" href="#">
-                  <img class="media-object" src="http://placehold.it/160x160" alt="...">
-              </a>
-              <div class="media-body">
-                  <h4 class="media-heading">
-                    Comentari de <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
-                    -
-                    <%= opinion[:date].to_time.to_formatted_s(:short) %>
+        <!-- list -->
+          <div class="media-list">
+            <% @opinions[:opinions].each do |opinion| %>
+              <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                      <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
+                      <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small>
+                      <img  src="http://placehold.it/30x30" alt="...">
+                    </h4>
 
-                    <img  src="http://placehold.it/30x30" alt="...">
-                  </h4>
-
-                <%= opinion[:description] %>
-              </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <!-- end list -->
+                  <%= opinion[:description] %>
+                </div>
+              </li>
+            <% end %>
+          </div>
+        <!-- end list -->
 
 
-    <% if @opinions && params[:ecommerce_id] && @total_pages > 1 %>
-      <ul class="pagination">
-        <% if @prev_page %>
-          <li>
-            <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-          </li>
-        <% end %>
-        <% (@first_page..@last_page).to_a.each do |page| %>
-          <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
-            <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
-          </li>
-        <% end %>
-        <% if @next_page %>
-          <li>
-            <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-          </li>
-        <% end %>
-      </ul>
+        <% if @opinions && params[:ecommerce_id] && @total_pages > 1 %>
+        <div class="text-center">
+          <ul class="pagination">
+            <% if @prev_page %>
+              <li>
+                <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+              </li>
+            <% end %>
+            <% (@first_page..@last_page).to_a.each do |page| %>
+              <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
+                <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
+              </li>
+            <% end %>
+            <% if @next_page %>
+              <li>
+                <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
+
       <% end %>
-    <!-- end paginator -->
-  <% end %>
 
+    </div>
+  </div>
 </div>
