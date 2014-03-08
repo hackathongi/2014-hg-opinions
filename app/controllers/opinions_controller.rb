@@ -9,8 +9,8 @@ class OpinionsController < ApplicationController
     conn = Faraday.new
     response = conn.get 'https://api.github.com/repos/technoweenie/faraday'
     response.status
+    # binding.pry
     @api_response = response.body
-
   end
 
   def test
