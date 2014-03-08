@@ -31,7 +31,7 @@ class OpinionsController < ApplicationController
 
       @opinions_array = @opinions[:opinions]
 
-      if Rails.env == 'production'
+      if false
         begin
           conn = Faraday.new @api_url
           response = conn.get
