@@ -21,5 +21,8 @@ module HgOpinions
     # config.i18n.default_locale = :de
     #
     config.sass.syntax = :sass
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    config.assets.precompile += %w( .svg .eot .woff .ttf )
   end
 end
