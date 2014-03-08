@@ -15,12 +15,20 @@ class OpinionsController < ApplicationController
 
       @api_url = "#{@base_url}/#{@api_end_point}"
 
-      if false
-        conn = Faraday.new @api_url
-        response = conn.get
-        response.status
-        @opinions = response.body
+      @total_pages =  @opinions[:total_page]
+      @query_parameters = request.query_parameters.slice(:page, :size)
+
+      if Rails.env == 'production'
+        begin
+          conn = Faraday.new @api_url
+          response = conn.get
+          response.status
+          @opinions = response.body
+        rescue
+          flash[:error] = "Ha ocurrido un error al conectar con el servidor"
+        end
       end
+
     end
   end
 
@@ -32,6 +40,7 @@ class OpinionsController < ApplicationController
 
   def load_data
     @opinions = {
+      :total_page => 28,
       :opinions => [
         {
           :opinion_id => 1,
