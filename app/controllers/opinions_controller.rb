@@ -36,15 +36,18 @@ class OpinionsController < ApplicationController
       @api_url = "#{@api_url}?offset=#{@current_page}&token=#{@ecommerce_id}&limit=#{@default_limit}"
 
       begin
+        @fake_opinions = @opinions
         conn = Faraday.new @api_url
         response = conn.get
         response.status
         if status == 200
           @opinions = JSON.parse response.body
         else
+          @opinions = @fake_opinions
           flash[:error] = "Ha ocurrido un error al conectar con el servidor"
         end
       rescue
+        @opinions = @fake_opinions
         flash[:error] = "Ha ocurrido un error al conectar con el servidor"
       end
 
