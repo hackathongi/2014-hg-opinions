@@ -1,66 +1,10 @@
-api_url:
-<h1><%= @api_url %></h1>
-
-<% @opinions[:opinions].each do |opinion| %>
-  <%= opinion[:description] %>
-<% end %>
-
-<% if @ecommerce_id %>
-  <% @opinions[:opinions].each do |opinion| %>
-    <%= opinion[:description] %>
-  <% end %>
-<% else %>
-  Ecommerce not found
-<% end %>
-
 <div class="container">
-
-  <!-- page description -->
-  <h1>Llistat d'opinions</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam lobortis sagittis. Curabitur ut nisi eget leo condimentum porta in quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sed volutpat libero. Fusce pulvinar gravida elit non pretium. Duis semper purus id neque fermentum egestas. Fusce vitae lectus eu est pellentesque faucibus ut ac lectus. Pellentesque consectetur accumsan dignissim.</p>
-  <!-- end page description -->
-
-  <!-- alert danger -->
-  <div class="alert alert-danger">Ho sentim, no hem pogut mostrar opinions per aquesta botiga <strong>nom_botiga</strong>.</div>
-  <!-- end alert danger -->
-
-  <!-- alert success -->
-  <div class="alert alert-success">Hem trobat <strong>n opinions</strong> per a <strong>nom_botiga</strong>.</div>
-  <!-- end alert success -->
-
-  <!--
   <div class="row">
-    <div class="col-xs-6 col-md-3">
-      <a href="#" class="thumbnail">
-        <img data-src="holder.js/100%x180" alt="...">
-      </a>
-    </div>
-
-</div>
--->
-
-  <!--
-  <div class="row">
-    <img class="col-md-1" src="http://placehold.it/150x150">
-    <img class="col-md-1" src="http://placehold.it/150x150">
-    <img class="col-md-1" src="http://placehold.it/150x150">
-    <img class="col-md-1" src="http://placehold.it/150x150">
-    <img class="col-md-1" src="http://placehold.it/150x150">
+    <h1>Llistat d'opinions</h1>
+    <h1><%= @api_url %></h1>
   </div>
--->
 
-  <!-- end icons -->
-  <!--
-<ul class="pagination">
-  <li class="disabled"><a href="">&laquo;</a></li>
-  <li class="active"><a href="">1</a></li>
-  <li><a href="">2</a></li>
-  <li><a href="">3</a></li>
-  <li><a href="">4</a></li>
-  <li><a href="">5</a></li>
-  <li><a href="">&raquo;</a></li>
-</ul>
--->
+  <%= render "shared/flash_message" %>
 
   <!-- list -->
   <div class="row">
