@@ -18,6 +18,21 @@ class OpinionsController < ApplicationController
       @total_pages =  @opinions[:total_page]
       @query_parameters = request.query_parameters.slice(:page, :size)
 
+      if params[:page] && params[:page].to_i > 0 && @total_pages > 0
+        @current_page = params[:page].to_i
+        @last_page = @current_page + 5 <= 10 ? 10 : @current_page + 5
+        if @last_page > @total_pages
+          @last_page = @total_pages
+        end
+        @first_page = @current_page - 5 > 0 && @current_page - 5 < @last_page  ? @current_page - 5 : 1
+        @prev_page = @first_page -1 > 0 ? @first_page -1 : false
+        @next_page = @last_page + 1 <= @total_pages ? @last_page + 1 : false
+      end
+
+
+
+      @opinions_array = @opinions[:opinions]
+
       if Rails.env == 'production'
         begin
           conn = Faraday.new @api_url
@@ -40,7 +55,7 @@ class OpinionsController < ApplicationController
 
   def load_data
     @opinions = {
-      :total_page => 28,
+      :total_page => 3,
       :opinions => [
         {
           :opinion_id => 1,
