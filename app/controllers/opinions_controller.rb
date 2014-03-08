@@ -24,32 +24,75 @@ class OpinionsController < ApplicationController
 
   private
 
-  def get_ecommerce_id
-    @ecommerce_id = params[:ecommerce_id] ? params[:ecommerce_id] : 1
-  end
-
   def load_data
-    @opinions = [
-      {
-        :opinion_id => 1,
-        :description => "Foooooo",
-        :rating => 1,
-        :date => '2013-03-13',
-        :date_add => '2013-02-13',
-        :date_update => '2013-02-13',
-        :order_id => 2,
-        :lang => "es"
-      },
-      {
-        :opinion_id => 1,
-        :description => "Foooooo",
-        :rating => 1,
-        :date => '2013-03-13',
-        :date_add => '2013-02-13',
-        :date_update => '2013-02-13',
-        :order_id => 2,
-        :lang => "es"
-      }
-    ]
+    @api_response = {
+      :opinions => [
+        {
+          :opinion_id => 1,
+          :description => "This is a Description 1",
+          :rating => 3,
+          :date => '2013-03-13 12:12:12',
+          :date_add => '2013-03-13 12:12:12',
+          :date_update => '2013-03-13 12:12:12',
+          :lang => "es",
+          :customer => {
+            :name => "John",
+            :surname => "Smith"
+          }
+        },
+        {
+          :opinion_id => 2,
+          :description => "This is a Description 2",
+          :rating => 5,
+          :date => '2013-03-13 10:12:12',
+          :date_add => '2013-03-13 10:12:12',
+          :date_update => '2013-03-13 10:12:12',
+          :lang => "es",
+          :customer => {
+            :name => "Anna",
+            :surname => "Low"
+          }
+        },
+        {
+          :opinion_id => 3,
+          :description => "This is a Description 3",
+          :rating => 3,
+          :date => '2013-03-13 09:12:12',
+          :date_add => '2013-03-13 09:12:12',
+          :date_update =>'2013-03-13 09:12:12',
+          :lang => "es",
+          :customer => {
+            :name => "Jack",
+            :surname => "Jones"
+          }
+        },
+        {
+          :opinion_id => 4,
+          :description => "This is a Description 4",
+          :rating => 5,
+          :date => '2013-03-13 08:12:12',
+          :date_add => '2013-03-13 08:12:12',
+          :date_update =>'2013-03-13 08:12:12',
+          :lang => "es",
+          :customer => {
+            :name => "Tomy",
+            :surname => "Makkinen"
+          }
+        },
+        {
+          :opinion_id => 5,
+          :description => "This is a Description 5",
+          :rating => 1,
+          :date => '2013-03-13 07:12:12',
+          :date_add => '2013-03-13 07:12:12',
+          :date_update =>'2013-03-13 07:12:12',
+          :lang => "es",
+          :customer => {
+            :name => "Richard",
+            :surname => "Burns"
+          }
+        }
+      ]
+    }
   end
 end
