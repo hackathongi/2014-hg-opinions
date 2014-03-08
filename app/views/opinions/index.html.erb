@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12 col-md-12">
       <!-- page description -->
       <h1>Llistat d'opinions</h1>
       <!-- end page description -->
@@ -27,16 +27,15 @@
                     <h4 class="media-heading">
                       <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
                       <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small>
-                      <img  src="http://placehold.it/30x30" alt="...">
+                      <div class="pull-right icon-face-<%= opinion[:rating] %> small-icon"></div>
                     </h4>
 
                   <%= opinion[:description] %>
                 </div>
-              </li>
+              </div>
             <% end %>
           </div>
         <!-- end list -->
-
 
         <% if @opinions && params[:ecommerce_id] && @total_pages > 1 %>
         <div class="text-center">
