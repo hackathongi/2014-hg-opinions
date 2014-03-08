@@ -126,4 +126,7 @@ class OpinionsController < ApplicationController
       ]
     }
   end
+
+  def test
+  end  
 end
