@@ -10,12 +10,9 @@
 
       <% if @ecommerce_id %>
         <ul class="stats text-center">
-          <div class="icon-face-0 big-icon"></div>
-          <div class="icon-face-1 big-icon"></div>
-          <div class="icon-face-2 big-icon"></div>
-          <div class="icon-face-3 big-icon"></div>
-          <div class="icon-face-4 big-icon"></div>
-          <div class="icon-face-5 big-icon"></div>
+          <% (0..5).each do |rating| %>
+            <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => rating})), {:class => "icon-face-#{rating} big-icon"} %>
+          <% end %>
         </ul>
         <!-- end stats -->
 
