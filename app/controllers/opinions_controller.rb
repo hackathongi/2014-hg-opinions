@@ -27,6 +27,8 @@ class OpinionsController < ApplicationController
         @first_page = @current_page - 5 > 0 && @current_page - 5 < @last_page  ? @current_page - 5 : 1
         @prev_page = @first_page -1 > 0 ? @first_page -1 : false
         @next_page = @last_page + 1 <= @total_pages ? @last_page + 1 : false
+      else
+        @total_pages = 0
       end
 
       @opinions_array = @opinions[:opinions]
