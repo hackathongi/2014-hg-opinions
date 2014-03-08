@@ -1,18 +1,6 @@
 api_url:
 <h1><%= @api_url %></h1>
 
-<% @opinions[:opinions].each do |opinion| %>
-  <%= opinion[:description] %>
-<% end %>
-
-<% if @ecommerce_id %>
-  <% @opinions[:opinions].each do |opinion| %>
-    <%= opinion[:description] %>
-  <% end %>
-<% else %>
-  Ecommerce not found
-<% end %>
-
 <div class="container">
 
   <!-- page description -->
@@ -65,6 +53,24 @@ api_url:
   <!-- list -->
   <div class="row">
     <ul class="media-list">
+    	<% if @ecommerce_id %>
+  			<% @opinions[:opinions][:opinions].each do |opinion| %>
+    			<li class="media">
+        			<a class="pull-left" href="#">
+          				<img class="media-object" src="http://placehold.it/75x75" alt="...">
+        			</a>
+        			<div class="media-body">
+          				<h4 class="media-heading"><%= opinion[:client][:name]%>  <%= opinion[:client][:surname] %></h4>
+          				<h5><time datetime="<%= opinion[:date] %>"><%= opinion[:date].to_time.to_formatted_s(:short) %></time></h5>
+				        <%= opinion[:description] %>
+        			</div>
+     			</li>
+ 	 	<% end %>
+		<% else %>
+  			Ecommerce not found
+  		<% end %>
+     
+      <!--
       <li class="media">
         <a class="pull-left" href="#">
           <img class="media-object" src="http://placehold.it/75x75" alt="...">
@@ -100,16 +106,7 @@ api_url:
           <h4 class="media-heading">Media heading</h4>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam lobortis sagittis. Curabitur ut nisi eget leo condimentum porta in quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
         </div>
-      </li>
-      <li class="media">
-        <a class="pull-left" href="#">
-          <img class="media-object" src="http://placehold.it/75x75" alt="...">
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading">Media heading</h4>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam lobortis sagittis. Curabitur ut nisi eget leo condimentum porta in quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        </div>
-      </li>
+      </li>-->
     </ul>
   </div>
   <!-- end list -->
