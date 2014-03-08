@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-12">
       <!-- page description -->
-      <h1>Llistat d'opinions</h1>
+      <h1 class="text-center">Llistat d'opinions</h1>
       <!-- end page description -->
 
       <!-- alert danger -->
@@ -18,14 +18,14 @@
 
         <!-- list -->
           <div class="media-list">
-            <% @opinions[:opinions].each do |opinion| %>
+            <% @opinions.each do |opinion| %>
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => opinion[:rating]})), {:class => "pull-right icon-face-#{ opinion[:rating]} small-icon"} %>
-                  <h4><%= opinion[:client][:name]%> <%= opinion[:client][:surname] %> <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small></h4>
+                  <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => opinion['rating']})), {:class => "pull-right icon-face-#{ opinion['rating']} small-icon"} %>
+                  <h4><%= opinion['username']%> <small><%= opinion['createdAt'].to_time.to_formatted_s(:short) %></small></h4>
                 </div>
                 <div class="panel-body">
-                  <%= opinion[:description] %>
+                  <%= opinion['description'] %>
                 </div>
               </div>
             <% end %>

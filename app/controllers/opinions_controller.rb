@@ -16,7 +16,7 @@ class OpinionsController < ApplicationController
 
       @api_url = "#{@base_url}/#{@api_end_point}"
 
-      @total_pages =  @opinions[:total_page]
+      @total_pages =  23
       @query_parameters = request.query_parameters.slice(:page, :size)
 
       if @total_pages > 0
@@ -34,7 +34,8 @@ class OpinionsController < ApplicationController
 
       @api_url = "#{@api_url}?offset=#{@current_page}&token=#{@ecommerce_id}&limit=#{@default_limit}"
 
-      if false
+
+      if params[:api]
         begin
           @fake_opinions = @opinions
           conn = Faraday.new @api_url
@@ -64,79 +65,38 @@ class OpinionsController < ApplicationController
   private
 
   def load_data
-    @opinions = {
-        :total_page => 14,
-        :total_opinions => 5,
-        :average_rating => 4,
-        :opinions => [
-        {
-          :opinion_id => 1,
-          :description => "La comparativa es muy clara y accesible y permite decidir con una amplia información. Resulta muy útil.",
-          :rating => 3,
-          :lang => "es",
-          :date => '2013-03-13 13:12',
-          :client => {
-            :name => "John",
-            :surname => "Smith"
-          }
+    @opinions = [{
+          'id' => 2,
+          'description' => "Despista un poco el rastreo del paquete. No es muy detallado. Por lo demás, el ordenador y características de mi Medion Akoya excelente, salvo en la batería que no dura apenas en comparación, quizás, a otras marcas.",
+          'rating' => 5,
+          'lang' => "es",
+          'createdAt' => '2013-03-13 12:12',
+          'username' => "Richard"
         },
         {
-          :opinion_id => 2,
-          :description => "Despista un poco el rastreo del paquete. No es muy detallado. Por lo demás, el ordenador y características de mi Medion Akoya excelente, salvo en la batería que no dura apenas en comparación, quizás, a otras marcas.",
-          :rating => 5,
-          :lang => "es",
-          :date => '2013-03-13 12:12',
-          :client => {
-            :name => "Richard",
-            :surname => "Burns"
-          }
+          'id' => 1,
+          'description' => "La comparativa es muy clara y accesible y permite decidir con una amplia información. Resulta muy útil.",
+          'rating' => 0,
+          'lang' => "es",
+          'createdAt' => '2013-03-14 12:12',
+          'username' => "Smith"
         },
         {
-          :opinion_id => 3,
-          :description => "Los productos están bien presentados y bien especificados.",
-          :rating => 2,
-          :lang => "es",
-          :date => '2013-03-13 11:12',
-          :client => {
-            :name => "Helena",
-            :surname => "Williams"
-          }
+          'id' => 4,
+          'description' => "Los productos están bien presentados y bien especificados.",
+          'rating' => 5,
+          'lang' => "es",
+          'createdAt' => '2013-03-15 12:12',
+          'username' => "Paco"
         },
         {
-          :opinion_id => 4,
-          :description => "Estoy totalmente de acuerdo con todo, es una pena que la tienda online Medion en España haya cerrado, parecia muy interesante y solo pude efectuar dos compras.",
-          :rating => 5,
-          :lang => "es",
-          :date => '2013-03-13 10:12',
-          :client => {
-            :name => "Colin",
-            :surname => "McRae"
-          }
-        },
-        {
-          :opinion_id => 5,
-          :description => "El producto bastante arañado y con muchos signos de desgaste , me ha decepcionado bastante.",
-          :rating => 1,
-          :lang => "es",
-          :date => '2013-03-13 09:12',
-          :client => {
-            :name => "Elthon",
-            :surname => "John"
-          }
-        },
-        {
-          :opinion_id => 6,
-          :description => "El embalaje daba pena, cartón deque parecía papel de fumar. ASí pasó cuando lo enchufé pitaba la placa base. En poco mas de un mes de vida del PC ya lo he llevado a reparar 2 veces. El servico técnico me lo envió sin reparar completamente. DEspués de comprar en promoción por la web quitaron la venta. Da la sensación que queráin quitarse stock defectuoso de encima. Estoy muy descontento y sin ordenador todavía.",
-          :rating => 3,
-          :lang => "es",
-          :date => '2013-03-13 08:12',
-          :client => {
-            :name => "Tommy",
-            :surname => "Makkinen"
-          }
-        }
-      ]
-    }
+          'id' => 4,
+          'description' => "Estoy totalmente de acuerdo con todo, es una pena que la tienda online Medion en España haya cerrado, parecia muy interesante y solo pude efectuar dos compras.",
+          'rating' => 2,
+          'lang' => "es",
+          'createdAt' => '2013-03-13 12:12',
+          'username' => "Williams"
+        }]
   end
 
   def test
