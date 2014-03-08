@@ -1,0 +1,4 @@
+opinions
+========
+
+Listat de opinions
