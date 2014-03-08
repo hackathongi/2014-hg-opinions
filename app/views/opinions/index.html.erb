@@ -1,5 +1,8 @@
 api_url:
 <h1><%= @api_url %></h1>
+<% @opinions.each do |opinion| %>
+  <%= opinion[:description] %>
+<% end %>
 
 <% if @ecommerce_id %>
   <% @opinions[:opinions].each do |opinion| %>
