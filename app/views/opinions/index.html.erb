@@ -1,74 +1,69 @@
 <div class="container">
+  <!-- page description -->
+  <h1>Llistat d'opinions</h1>
+  <!-- end page description -->
 
-	<!-- page description -->
-	<h1>Llistat d'opinions</h1>
-	<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam lobortis sagittis. Curabitur ut nisi eget leo condimentum porta in quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In sed volutpat libero. Fusce pulvinar gravida elit non pretium.</p>
-	<!-- end page description -->
+  <!-- alert danger -->
+  <%= render "shared/flash_message" %>
 
-	<!-- alert danger -->
-	<!--<div class="alert alert-danger">Ho sentim, no hem pogut mostrar opinions per aquesta botiga <strong>nom_botiga</strong>.</div>-->
-	<!-- end alert danger -->
-	
-	<!-- stats -->
-	<ul class="stats text-center">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-		<img class="display-block" src="http://placehold.it/90x90" alt="...">
-	</ul>
-	<!-- end stats -->
-
-  <!-- list -->
-  <div class="row">
-    <ul class="media-list">
-    	<% if @ecommerce_id %>
-  			<% @opinions[:opinions].each do |opinion| %>
-    			<li class="media">
-        			<a class="pull-left" href="#">
-          				<img class="media-object" src="http://placehold.it/160x160" alt="...">
-        			</a>
-        			<div class="media-body">
-          				<h4 class="media-heading">
-          					Comentari de <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
-          					-
-          					<%= opinion[:date].to_time.to_formatted_s(:short) %>
-
-          					<img  src="http://placehold.it/30x30" alt="...">
-          				</h4>
-          				
-				        <%= opinion[:description] %>
-        			</div>
-     			</li>
- 	 	<% end %>
-		<% else %>
-  			Ecommerce not found
-  		<% end %>
+  <% if @ecommerce_id %>
+    <!-- stats -->
+    <ul class="stats text-center">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
+      <img class="display-block" src="http://placehold.it/90x90" alt="...">
     </ul>
-  </div>
-  <!-- end list -->
+    <!-- end stats -->
+
+    <!-- list -->
+    <div class="row">
+      <ul class="media-list">
+        <% @opinions[:opinions].each do |opinion| %>
+          <li class="media">
+              <a class="pull-left" href="#">
+                  <img class="media-object" src="http://placehold.it/160x160" alt="...">
+              </a>
+              <div class="media-body">
+                  <h4 class="media-heading">
+                    Comentari de <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
+                    -
+                    <%= opinion[:date].to_time.to_formatted_s(:short) %>
+
+                    <img  src="http://placehold.it/30x30" alt="...">
+                  </h4>
+
+                <%= opinion[:description] %>
+              </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- end list -->
 
 
-  <% if @opinions && @total_pages > 1%>
-    <ul class="pagination">
-      <% if @prev_page %>
-        <li>
-          <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-        </li>
+    <% if @opinions && params[:ecommerce_id] && @total_pages > 1 %>
+      <ul class="pagination">
+        <% if @prev_page %>
+          <li>
+            <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+          </li>
+        <% end %>
+        <% (@first_page..@last_page).to_a.each do |page| %>
+          <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
+            <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
+          </li>
+        <% end %>
+        <% if @next_page %>
+          <li>
+            <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+          </li>
+        <% end %>
+      </ul>
       <% end %>
-      <% (@first_page..@last_page).to_a.each do |page| %>
-        <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
-          <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
-        </li>
-      <% end %>
-      <% if @next_page %>
-        <li>
-          <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
-        </li>
-      <% end %>
-    </ul>
-  	<% end %>
-	<!-- end paginator -->
+    <!-- end paginator -->
+  <% end %>
 
 </div>

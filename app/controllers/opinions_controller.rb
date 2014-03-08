@@ -42,6 +42,8 @@ class OpinionsController < ApplicationController
         end
       end
 
+    else
+      flash[:error] = "Aqui no hay opiniones"
     end
   end
 
