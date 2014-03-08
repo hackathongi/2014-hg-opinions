@@ -33,7 +33,7 @@ class OpinionsController < ApplicationController
       @api_url = "#{@api_url}?offset=#{@current_page}&token=#{@ecommerce_id}&limit=#{@default_limit}"
 
 
-      if false
+      if params[:api]
         begin
           @fake_opinions = @opinions
           conn = Faraday.new @api_url
