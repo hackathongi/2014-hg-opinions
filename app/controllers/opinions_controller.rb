@@ -13,7 +13,7 @@ class OpinionsController < ApplicationController
       @base_url = OPINIONS_CONFIG['domain']
       @api_end_point = OPINIONS_CONFIG['opinions_end_poin']
 
-      @api_url = "#{@base_url}/#{z@api_end_point}"
+      @api_url = "#{@base_url}/#{@api_end_point}"
 
       if false
         conn = Faraday.new @api_url

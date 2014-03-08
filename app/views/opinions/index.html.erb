@@ -1,7 +1,7 @@
 api_url:
 <h1><%= @api_url %></h1>
 
-<% @opinions.each do |opinion| %>
+<% @opinions[:opinions].each do |opinion| %>
   <%= opinion[:description] %>
 <% end %>
 
