@@ -10,12 +10,18 @@ class OpinionsController < ApplicationController
 
     if params[:ecommerce_id]
       @ecommerce_id = params[:ecommerce_id]
-      # conn = Faraday.new
-      # response = conn.get 'http://localhost:3000/fake-api'
-      # response.status
-      # @opinions = response.body
+      @base_url = OPINIONS_CONFIG['domain']
+      @api_end_point = OPINIONS_CONFIG['opinions_end_poin']
+
+      @api_url = "#{@base_url}/#{z@api_end_point}"
+
+      if false
+        conn = Faraday.new @api_url
+        response = conn.get
+        response.status
+        @opinions = response.body
+      end
     end
-    # binding.pry
   end
 
   def fake_api
@@ -25,7 +31,7 @@ class OpinionsController < ApplicationController
   private
 
   def load_data
-    @api_response = {
+    @opinions = {
       :opinions => [
         {
           :opinion_id => 1,
