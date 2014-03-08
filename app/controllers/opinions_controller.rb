@@ -18,8 +18,8 @@ class OpinionsController < ApplicationController
       @total_pages =  @opinions[:total_page]
       @query_parameters = request.query_parameters.slice(:page, :size)
 
-      if params[:page] && params[:page].to_i > 0 && @total_pages > 0
-        @current_page = params[:page].to_i
+      if @total_pages > 0
+        @current_page = params[:page].to_i > 0 ? params[:page].to_i : 1
         @last_page = @current_page + 5 <= 10 ? 10 : @current_page + 5
         if @last_page > @total_pages
           @last_page = @total_pages
@@ -28,8 +28,6 @@ class OpinionsController < ApplicationController
         @prev_page = @first_page -1 > 0 ? @first_page -1 : false
         @next_page = @last_page + 1 <= @total_pages ? @last_page + 1 : false
       end
-
-
 
       @opinions_array = @opinions[:opinions]
 
@@ -55,71 +53,74 @@ class OpinionsController < ApplicationController
 
   def load_data
     @opinions = {
-      :total_page => 3,
-      :opinions => [
+        :total_page => 3,
+        :total_opinions => 5,
+        :average_rating => 4,
+        :opinions => [
         {
           :opinion_id => 1,
-          :description => "This is a Description 1",
+          :description => "La comparativa es muy clara y accesible y permite decidir con una amplia información. Resulta muy útil.",
           :rating => 3,
-          :date => '2013-03-13 12:12:12',
-          :date_add => '2013-03-13 12:12:12',
-          :date_update => '2013-03-13 12:12:12',
           :lang => "es",
-          :customer => {
+          :date => '2013-03-13 13:12',
+          :client => {
             :name => "John",
             :surname => "Smith"
           }
         },
         {
           :opinion_id => 2,
-          :description => "This is a Description 2",
+          :description => "Despista un poco el rastreo del paquete. No es muy detallado. Por lo demás, el ordenador y características de mi Medion Akoya excelente, salvo en la batería que no dura apenas en comparación, quizás, a otras marcas.",
           :rating => 5,
-          :date => '2013-03-13 10:12:12',
-          :date_add => '2013-03-13 10:12:12',
-          :date_update => '2013-03-13 10:12:12',
           :lang => "es",
-          :customer => {
-            :name => "Anna",
-            :surname => "Low"
+          :date => '2013-03-13 12:12',
+          :client => {
+            :name => "Richard",
+            :surname => "Burns"
           }
         },
         {
           :opinion_id => 3,
-          :description => "This is a Description 3",
-          :rating => 3,
-          :date => '2013-03-13 09:12:12',
-          :date_add => '2013-03-13 09:12:12',
-          :date_update =>'2013-03-13 09:12:12',
+          :description => "Los productos están bien presentados y bien especificados.",
+          :rating => 2,
           :lang => "es",
-          :customer => {
-            :name => "Jack",
-            :surname => "Jones"
+          :date => '2013-03-13 11:12',
+          :client => {
+            :name => "Helena",
+            :surname => "Williams"
           }
         },
         {
           :opinion_id => 4,
-          :description => "This is a Description 4",
+          :description => "Estoy totalmente de acuerdo con todo, es una pena que la tienda online Medion en España haya cerrado, parecia muy interesante y solo pude efectuar dos compras.",
           :rating => 5,
-          :date => '2013-03-13 08:12:12',
-          :date_add => '2013-03-13 08:12:12',
-          :date_update =>'2013-03-13 08:12:12',
           :lang => "es",
-          :customer => {
-            :name => "Tomy",
-            :surname => "Makkinen"
+          :date => '2013-03-13 10:12',
+          :client => {
+            :name => "Colin",
+            :surname => "McRae"
           }
         },
         {
           :opinion_id => 5,
-          :description => "This is a Description 5",
+          :description => "El producto bastante arañado y con muchos signos de desgaste , me ha decepcionado bastante.",
           :rating => 1,
-          :date => '2013-03-13 07:12:12',
-          :date_add => '2013-03-13 07:12:12',
-          :date_update =>'2013-03-13 07:12:12',
           :lang => "es",
-          :customer => {
-            :name => "Richard",
-            :surname => "Burns"
+          :date => '2013-03-13 09:12',
+          :client => {
+            :name => "Elthon",
+            :surname => "John"
+          }
+        },
+        {
+          :opinion_id => 6,
+          :description => "El embalaje daba pena, cartón deque parecía papel de fumar. ASí pasó cuando lo enchufé pitaba la placa base. En poco mas de un mes de vida del PC ya lo he llevado a reparar 2 veces. El servico técnico me lo envió sin reparar completamente. DEspués de comprar en promoción por la web quitaron la venta. Da la sensación que queráin quitarse stock defectuoso de encima. Estoy muy descontento y sin ordenador todavía.",
+          :rating => 3,
+          :lang => "es",
+          :date => '2013-03-13 08:12',
+          :client => {
+            :name => "Tommy",
+            :surname => "Makkinen"
           }
         }
       ]
