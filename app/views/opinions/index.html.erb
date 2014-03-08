@@ -19,15 +19,19 @@
         <!-- list -->
           <div class="media-list">
             <% @opinions[:opinions].each do |opinion| %>
-              <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                      <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
-                      <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small>
-                      <div class="pull-right icon-face-<%= opinion[:rating] %> small-icon"></div>
-                    </h4>
 
-                  <%= opinion[:description] %>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                          <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
+                          <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small>
+                          <div class="pull-right icon-face-<%= opinion[:rating] %> small-icon"></div>
+                        </h4>
+                      <%= opinion[:description] %>
+                    </div>
+                  </div>
                 </div>
               </div>
             <% end %>
