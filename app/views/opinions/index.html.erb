@@ -27,7 +27,7 @@
                         <h4 class="media-heading">
                           <%= opinion[:client][:name]%> <%= opinion[:client][:surname] %>
                           <small><%= opinion[:date].to_time.to_formatted_s(:short) %></small>
-                          <div class="pull-right icon-face-<%= opinion[:rating] %> small-icon"></div>
+                          <%= link_to "".html_safe, client_opinions_path(@query_parameters.merge({:rating => opinion[:rating]})), {:class => "pull-right icon-face-#{ opinion[:rating]} small-icon"} %>
                         </h4>
                       <%= opinion[:description] %>
                     </div>
