@@ -61,13 +61,21 @@
 
   <% if @opinions && @total_pages > 1 %>
     <ul class="pagination">
-      <% (1..@total_pages).first(3).to_a.each do |page| %>
+      <% if @prev_page %>
         <li>
+          <%= link_to "&laquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+        </li>
+      <% end %>
+      <% (@first_page..@last_page).to_a.each do |page| %>
+        <li class="<%= is_active = @current_page == page ? 'active' : '' %>">
           <%= link_to page, client_opinions_path(@query_parameters.merge({:page => page})) %>
         </li>
       <% end %>
-        <!-- <li><a href="">&laquo;</a></li> -->
-        <!-- <li><a href="#">&raquo;</a></li> -->
+      <% if @next_page %>
+        <li>
+          <%= link_to "&raquo;".html_safe, client_opinions_path(@query_parameters.merge({:page => @prev_page})) %>
+        </li>
+      <% end %>
     </ul>
   <% end %>
 
