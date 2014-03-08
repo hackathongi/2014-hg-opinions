@@ -24,5 +24,9 @@ module HgOpinions
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+    config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL'
+    }
   end
 end
