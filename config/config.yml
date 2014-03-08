@@ -1,0 +1,8 @@
+development:
+  domain: "http://localhost"
+  opinions_end_poin: "opinions"
+
+production:
+  domain: "http://ecomerce.com"
+  opinions_end_poin: "opinions"
+
