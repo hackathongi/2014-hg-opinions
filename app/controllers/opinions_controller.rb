@@ -53,7 +53,7 @@ class OpinionsController < ApplicationController
 
   def load_data
     @opinions = {
-        :total_page => 3,
+        :total_page => 14,
         :total_opinions => 5,
         :average_rating => 4,
         :opinions => [
@@ -128,5 +128,5 @@ class OpinionsController < ApplicationController
   end
 
   def test
-  end  
+  end
 end
